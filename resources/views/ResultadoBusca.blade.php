@@ -17,7 +17,7 @@
             @foreach ($artigos as $artigo)
                 <tr>
                     <td>{{ $artigo->titulo }}</td>
-                    <td>{{ $artigo->link }}</td>
+                    <td><a href="{{ $artigo->link }}">{{ $artigo->link }}</a></td>
                     <td>
                         <a href="{{ route('artigos.delete', $artigo->id) }}">Excluir</a>
                     </td>
