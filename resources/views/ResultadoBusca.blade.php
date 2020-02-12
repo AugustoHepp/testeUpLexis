@@ -1,11 +1,10 @@
 
 @extends('layouts.layout')
 
-
-@section('cabecalho', 'Resultado da busca')
-
 @section('conteudo')
     <h1>Artigos pesquisados</h1>
+    <a href="{{ route('index') }}">Nova busca</a>
+
     <table class="table table-striped">
         <thead>
             <tr>

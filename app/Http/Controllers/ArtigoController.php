@@ -58,7 +58,7 @@ class ArtigoController extends Controller
     if (count($titulos) > 0 ){
 
         for ($i = 0; $i < count($titulos); $i++){
-            echo trim($titulos[$i]) . " " . trim($links[$i]) . "</br>";
+            //echo trim($titulos[$i]) . " " . trim($links[$i]) . "</br>";
 
             $this->novoArtigo($id_usuario, trim($titulos[$i]), trim($links[$i]));
         }
@@ -68,28 +68,30 @@ class ArtigoController extends Controller
         return redirect()->back()->with('jsAlert', $message);;
     }
     
-    
     $artigos = artigo::where('id_usuario',$id_usuario)->get();
 
-    $colecao = $artigos->ToArray();
+    return view('ResultadoBusca', ['artigos' => $artigos]);
 
-    print_r($colecao);
+    /*
+    $artigos = array();
+    $colecao = artigo::where('id_usuario',$id_usuario)->get();
 
-    return view('ResultadoBusca', [
-        'artigos' => $colecao,
-    ]);
+    $artigos = $colecao->ToArray();
+
+    return view('ResultadoBusca', ['artigos' => (object) $artigos]);
+    */
 
    }
 
    private function novoArtigo($id_usuario, $titulo, $link){
 
-    $artigo = new artigo();
+        $artigo = new artigo();
 
-    $artigo->id_usuario = $id_usuario;
-    $artigo->titulo = $titulo;
-    $artigo->link = $link;
+        $artigo->id_usuario = $id_usuario;
+        $artigo->titulo = $titulo;
+        $artigo->link = $link;
 
-    $artigo->save();
+        $artigo->save();
 
     }
 
@@ -101,10 +103,6 @@ class ArtigoController extends Controller
 
         $artigos = artigo::where('id_usuario',$id_usuario)->get();
 
-        $colecao = $artigos->attributesToArray();
-
-        return view('ResultadoBusca', [
-            'artigos' => $colecao,
-        ]);
+        return view('ResultadoBusca', ['artigos' => $artigos]);
     }
 }

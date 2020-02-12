@@ -1,13 +1,13 @@
 <?php
 
 Route::post('artigos', 'ArtigoController@index')->name('artigos.index')->middleware('auth');
-Route::post('artigos/delete', 'ArtigoController@deletar')->name('artigos.delete');
+Route::get('artigos/delete/{id}', 'ArtigoController@deletar')->name('artigos.delete');
 Route::get('user', function(){
     return view('auth.login');
 });
 Route::get('/', function(){
     return view('index');
-})->middleware('auth');
+})->name('index')->middleware('auth');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
